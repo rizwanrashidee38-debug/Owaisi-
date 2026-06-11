@@ -1,19 +1,19 @@
 
                                                 
-    <!DOCTYPE html>
+                                      <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Owaisi: The Grand Strategy Simulator</title>
+    <title>AIMIM: The Legislative Simulator</title>
     <style>
         :root {
-            --primary-color: #0f5132;
+            --primary-color: #0d5c3a;
             --secondary-color: #198754;
             --danger-color: #dc3545;
             --warning-color: #ffc107;
             --info-color: #0dcaf0;
-            --bg-color: #f4f6f9;
+            --bg-color: #f1f3f5;
             --card-bg: #ffffff;
             --text-color: #212529;
         }
@@ -27,7 +27,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 950px;
             margin: 0 auto;
             background: var(--card-bg);
             padding: 20px;
@@ -52,14 +52,14 @@
             font-style: italic;
             color: #6c757d;
             margin: 0;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         .meta-bar {
             display: flex;
             justify-content: space-between;
             background: #e9ecef;
-            padding: 10px;
+            padding: 12px;
             border-radius: 6px;
             margin-top: 12px;
             font-weight: bold;
@@ -73,7 +73,7 @@
             margin-bottom: 20px;
         }
 
-        @media (min-width: 600px) {
+        @media (min-width: 768px) {
             .dashboard { grid-template-columns: 1fr 1fr; }
         }
 
@@ -98,6 +98,29 @@
             margin: 10px 0 4px 0;
             font-weight: 600;
             font-size: 0.9rem;
+        }
+
+        .seats-box {
+            background: #f8f9fa;
+            border: 1px dashed var(--primary-color);
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .seat-metric {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .seat-label {
+            font-size: 0.75rem;
+            color: #6c757d;
+            text-transform: uppercase;
         }
 
         .progress-bar-container {
@@ -189,8 +212,6 @@
         }
 
         .hidden { display: none !important; }
-        .status-win { color: var(--secondary-color); font-weight: bold; font-size: 1.2rem; }
-        .status-loss { color: var(--danger-color); font-weight: bold; font-size: 1.2rem; }
         
         .log-box {
             background: #212529;
@@ -198,7 +219,7 @@
             font-family: 'Courier New', Courier, monospace;
             padding: 12px;
             border-radius: 6px;
-            max-height: 100px;
+            max-height: 110px;
             overflow-y: auto;
             font-size: 0.8rem;
             margin-top: 15px;
@@ -210,161 +231,150 @@
 
 <div class="container">
     <header>
-        <h1>Owaisi: The Grand Strategy</h1>
-        <p class="subtitle">Alliances, Expansion, and Structural Crises</p>
+        <h1>AIMIM: The Strategy Simulator</h1>
+        <p class="subtitle">Electoral Seat Share & Multi-Theater Front Management</p>
         <div class="meta-bar">
-            <div>Quarter: <span id="current-quarter">1</span>/12</div>
-            <div>Region: <span id="current-region">Telangana</span></div>
+            <div>Timeline: <span id="current-week">Week 1</span>/16 (Campaign Window)</div>
+            <div>Active Focus Hub: <span id="current-region">Hyderabad</span></div>
         </div>
     </header>
 
     <div class="dashboard">
-        <!-- Resource Panel -->
+        <!-- Structural Resources & Electoral Target Panel -->
         <div class="panel">
-            <h3>Resource Management</h3>
+            <h3>Electoral Metrics & Cash Flow</h3>
             <div class="stat-container">
-                <div class="stat-line"><span>Party Funds:</span> <span id="val-funds">₹50L</span></div>
+                <div class="stat-line"><span>Campaign Treasury:</span> <span id="val-funds">₹60L</span></div>
                 <div class="progress-bar-container"><div id="bar-funds" class="progress-bar"></div></div>
             </div>
             <div class="stat-container">
-                <div class="stat-line"><span>Political Capital:</span> <span id="val-capital">50/100</span></div>
+                <div class="stat-line"><span>Political Capital & Narrative Leverage:</span> <span id="val-capital">50/100</span></div>
                 <div class="progress-bar-container"><div id="bar-capital" class="progress-bar" style="background-color: var(--info-color);"></div></div>
             </div>
-            <div class="stat-container">
-                <div class="stat-line"><span>National Expansion:</span> <span id="val-expansion">20%</span></div>
-                <div class="progress-bar-container"><div id="bar-expansion" class="progress-bar" style="background-color: var(--warning-color);"></div></div>
+            
+            <!-- Real Seat Layout Tracker -->
+            <div class="seats-box">
+                <div>
+                    <div id="seat-contested" class="seat-metric">15</div>
+                    <div class="seat-label">Contested Seats</div>
+                </div>
+                <div>
+                    <div id="seat-projected" class="seat-metric" style="color: var(--secondary-color);">7</div>
+                    <div class="seat-label">Projected Wins</div>
+                </div>
             </div>
         </div>
 
-        <!-- Political Risks & Alliances -->
+        <!-- Theater Management Panels -->
         <div class="panel">
-            <h3>Demographics & Coalitions</h3>
+            <h3>Theater Approvals & Coalitions</h3>
             <div class="stat-container">
-                <div class="stat-line"><span>Core Base Trust:</span> <span id="val-core">65%</span></div>
-                <div class="progress-bar-container"><div id="bar-core" class="progress-bar"></div></div>
+                <div class="stat-line"><span>Hyderabad Old City (Fortress):</span> <span id="val-hyd">75%</span></div>
+                <div class="progress-bar-container"><div id="bar-hyd" class="progress-bar"></div></div>
             </div>
             <div class="stat-container">
-                <div class="stat-line"><span>Alliance Stability:</span> <span id="val-alliance">40%</span></div>
-                <div class="progress-bar-container"><div id="bar-alliance" class="progress-bar" style="background-color: #6f42c1;"></div></div>
+                <div class="stat-line"><span>Maharashtra Alliance Support (Social Block):</span> <span id="val-maha">45%</span></div>
+                <div class="progress-bar-container"><div id="bar-maha" class="progress-bar" style="background-color: #6f42c1;"></div></div>
             </div>
             <div class="stat-container">
-                <div class="stat-line"><span>Media & Legal Risk:</span> <span id="val-scrutiny">30%</span></div>
-                <div class="progress-bar-container"><div id="bar-scrutiny" class="progress-bar" style="background-color: var(--danger-color);"></div></div>
+                <div class="stat-line"><span>Bihar Seemanchal Base:</span> <span id="val-bihar">40%</span></div>
+                <div class="progress-bar-container"><div id="bar-bihar" class="progress-bar" style="background-color: var(--warning-color);"></div></div>
             </div>
         </div>
     </div>
 
-    <!-- Active Gameplay Window -->
+    <!-- Active Strategy Window -->
     <div class="game-mechanics">
-        <div id="event-badge" class="badge">Strategic Decision</div>
-        <div id="event-text" class="event-box">Initializing gameplay variables...</div>
+        <div id="event-badge" class="badge">Weekly Strategy Brief</div>
+        <div id="event-text" class="event-box">Initializing political grid map...</div>
         <div id="choices-box" class="choices-container"></div>
     </div>
 
-    <div style="font-weight: bold; margin-top: 15px; font-size: 0.9rem;">Political Analyst Logs:</div>
+    <div style="font-weight: bold; font-size: 0.9rem;">Intelligence Ticker:</div>
     <div id="log-box" class="log-box">
-        [SYSTEM]: System ready. Make your opening moves.
+        [SYSTEM]: Campaign path active. Your core asset optimization directly changes total seat calculations week-on-week.
     </div>
     
-    <button id="restart-btn" class="restart-btn hidden" onclick="resetGame()">Rerun Simulation</button>
+    <button id="restart-btn" class="restart-btn hidden" onclick="resetGame()">Rerun Campaign</button>
 </div>
 
 <script>
-    // Game State Configuration
+    // Game State Metrics Configuration
     let state = {
-        quarter: 1,
-        funds: 50,         
+        week: 1,
+        funds: 60,         
         capital: 50,       
-        expansion: 20,     
-        core: 65,          
-        alliance: 40,      
-        scrutiny: 30       
+        hyd: 75,           
+        maha: 45,          
+        bihar: 40,         
+        contested: 15
     };
 
-    const regions = [
-        "Telangana (Stronghold)", "Maharashtra (Expansion Zone)", "Bihar (Seemanchal Front)", 
-        "Uttar Pradesh (Challenger Arena)", "Gujarat (Testing Waters)", "Jharkhand (Borderlands)"
-    ];
+    const hubs = ["Hyderabad Core", "Marathwada Expansion Zone", "Seemanchal Frontier", "Western UP Belt"];
 
-    // Master Challenge Dataset
-    const challenges = [
+    // Real-World Scenario Dataset mapped to real AIMIM structural dynamics
+    const scenarioPool = [
         {
-            type: "EXPANSION CHALLENGE",
-            text: "Elections are announced in Bihar's Seemanchal region. Local cadres demand you contest 20 seats, but national media claims you will split votes.",
+            type: "SEEMANCHAL TARGETING",
+            text: "Week-level assembly nominations open in Bihar. Local leaders push to increase seats from 5 to 15 to establish structural presence. Alliance partners call it vote-splitting.",
             choices: [
                 {
-                    text: "Go all out. Deploy heavy campaign funds and top-tier orators to maximize your presence.",
-                    effect: { funds: -25, capital: +20, expansion: +25, core: +10, alliance: -15, scrutiny: +15 },
-                    log: "Contested aggressively in Bihar. Footprint grew, but drew fire from regional coalitions."
+                    text: "Contest all 15 seats. Assert independent choice and narrative power over rival platforms.",
+                    effect: { funds: -20, capital: +15, hyd: 0, maha: -5, bihar: +20, contested: +10 },
+                    log: "Expanded Bihar layout to 15 seats. Grassroots enthusiasm surged in Seemanchal, but regional alliance ties cooled down."
                 },
                 {
-                    text: "Tactical restraint. Contest only 5 core stronghold seats to preserve resources and alliance goodwill.",
-                    effect: { funds: -5, capital: -10, expansion: +5, core: -10, alliance: +15, scrutiny: -10 },
-                    log: "Maintained a conservative layout in Bihar. Saved assets but frustrated young cadres."
+                    text: "Restrict to 5 high-density target seats. Guard critical cash flow reserves and protect regional understandings.",
+                    effect: { funds: -5, capital: -10, hyd: 0, maha: +5, bihar: -10, contested: 0 },
+                    log: "Maintained structural discipline in Bihar. Kept alliance avenues clear but left local workers frustrated."
                 }
             ]
         },
         {
-            type: "ALLIANCE CRISIS",
-            text: "A prominent regional alliance partner asks you to cancel a high-profile rally in Maharashtra to preserve a complex anti-alignment floor negotiation.",
+            type: "MAHARASHTRA SOCIAL ALIGNMENT",
+            text: "In Aurangabad (Chhatrapati Sambhajinagar) and Mumbai city belts, Dalit and OBC community leaders demand a joint structural platform based on the 'Jai Bhim - Jai Meem' template.",
             choices: [
                 {
-                    text: "Accede to the ally's request to prioritize long-term secular coalition unity.",
-                    effect: { funds: 0, capital: +15, expansion: -10, core: -15, alliance: +25, scrutiny: -15 },
-                    log: "Stepped back from Maharashtra rally. Consolidated alliance framework over immediate visibility."
+                    text: "Offer up to 40% of seat allocations to non-minority alliance candidates to build a multi-demographic front.",
+                    effect: { funds: -10, capital: +15, hyd: -5, maha: +25, bihar: 0, contested: +4 },
+                    log: "Shared the ticket platform in Maharashtra. Social alliance score grew significantly, helping cross-community appeal."
                 },
                 {
-                    text: "Refuse to compromise. State that your political party independence cannot be bartered.",
-                    effect: { funds: -5, capital: +10, expansion: +15, core: +20, alliance: -25, scrutiny: +15 },
-                    log: "Chose independent path. Core voter base enthusiasm spiked; coalition integrity took damage."
+                    text: "Focus primarily on minority pockets to ensure a high-efficiency winning ratio.",
+                    effect: { funds: -5, capital: +5, hyd: +5, maha: -15, bihar: 0, contested: -2 },
+                    log: "Consolidated internal minority voting lanes. Protected fortress efficiency but limited expansion avenues in Maharashtra."
                 }
             ]
         },
         {
-            type: "LEGAL & MEDIA SCRUTINY",
-            text: "A sensationalized state controversy breaks out. Prime-time news channels host high-decibel debates challenging your political positions.",
+            type: "HYDERABAD FORTRESS MAINTENANCE",
+            text: "Rival national coalitions launch intense campaign spending inside your core old-city stronghold. Local cadres request massive door-to-door deployment funding.",
             choices: [
                 {
-                    text: "Counter-attack legally. Host a structured press conference using explicit constitutional safe clauses.",
-                    effect: { funds: -10, capital: +15, expansion: +5, core: +5, alliance: +10, scrutiny: -15 },
-                    log: "De-escalated media assault with explicit legal frameworks. Protected coalition image."
+                    text: "Divert significant party funds from out-of-state campaigns back into the Hyderabad home defense network.",
+                    effect: { funds: -25, capital: +10, hyd: +20, maha: -10, bihar: -10, contested: 0 },
+                    log: "Secured home base fortress through high defensive funding. Out-of-state momentum slowed temporarily."
                 },
                 {
-                    text: "Fierce political defense. Mass rally mobilization on the ground to rally the base.",
-                    effect: { funds: -5, capital: +25, expansion: +10, core: +20, alliance: -20, scrutiny: +30 },
-                    log: "Galvanized grassroots via sharp rhetoric. Core trust solidified, but scrutiny risk peaked."
+                    text: "Trust your traditional network machinery; keep focus and resources trained on expansion zones.",
+                    effect: { funds: -5, capital: +5, hyd: -15, maha: +10, bihar: +10, contested: 0 },
+                    log: "Relied on structural loyalty in Hyderabad. Kept resources forward-deployed in expansion states."
                 }
             ]
         },
         {
-            type: "INTERNAL PARTY RIFT",
-            text: "An influential veteran party leader threatens to defect to an opponent party unless his family member is given preference over a young scholar for an upcoming ticket.",
+            type: "NARRATIVE DEFENSE",
+            text: "Mainstream television networks launch aggressive prime-time debates accusing your party of being a strategic spoiler designed to break anti-incumbency votes.",
             choices: [
                 {
-                    text: "Appease the veteran politician. Seat preservation and internal stability come first.",
-                    effect: { funds: +15, capital: +10, expansion: -5, core: -10, alliance: +5, scrutiny: 0 },
-                    log: "Pacified old guard faction. Preserved stability but dented appeal among educated youth."
+                    text: "Deploy sharp constitutional arguments on mainstream channels, detailing historical under-representation metrics.",
+                    effect: { funds: 0, capital: +25, hyd: +5, maha: +5, bihar: +5, contested: 0 },
+                    log: "Mounted a sharp defense based on representation rights. Raised national standing and stabilized trust."
                 },
                 {
-                    text: "Stand firm on principle. Award the ticket to the young grassroots activist.",
-                    effect: { funds: -10, capital: -15, expansion: +10, core: +20, alliance: -5, scrutiny: +10 },
-                    log: "Defied traditional pressures. Backed youth candidate; veteran defected causing short-term friction."
-                }
-            ]
-        },
-        {
-            type: "FINANCIAL EMERGENCY",
-            text: "Strict state monitoring tools choke off traditional alternative fundraising channels, stalling active cross-state logistics.",
-            choices: [
-                {
-                    text: "Launch an aggressive digital crowdfunding drive across the wider domestic diaspora.",
-                    effect: { funds: +25, capital: -10, expansion: 0, core: +15, alliance: 0, scrutiny: +25 },
-                    log: "Digital crowdfunding successful. Replenished funds but drew immediate tax audit eyes."
-                },
-                {
-                    text: "Implement strict austerity measures. Temporarily scale back out-of-state field offices.",
-                    effect: { funds: +10, capital: -15, expansion: -20, core: -5, alliance: -5, scrutiny: -15 },
-                    log: "Retrenched out-of-state field operations. Balanced books but slowed national momentum."
+                    text: "Bypass national TV platforms completely. Shift focus to decentralized YouTube channels and public rallies.",
+                    effect: { funds: -10, capital: -5, hyd: +10, maha: 0, bihar: +5, contested: 0 },
+                    log: "Bypassed standard media channels. Boosted unmediated trust among base, though lost wider cross-community visibility."
                 }
             ]
         }
@@ -372,21 +382,46 @@
 
     function logMessage(msg) {
         const logBox = document.getElementById('log-box');
-        logBox.innerHTML += `<br>[Q${state.quarter}]: ${msg}`;
+        logBox.innerHTML += `<br>[W${state.week}]: ${msg}`;
         logBox.scrollTop = logBox.scrollHeight;
     }
 
+    // Dynamic Engine calculating seat projections based on real political arithmetic
+    function calculateProjectedWins() {
+        let score = 0;
+        
+        // Hyderabad calculations (High conversion yield)
+        if (state.hyd >= 70) score += 6;
+        else if (state.hyd >= 50) score += 4;
+        else score += 1;
+
+        // Maharashtra calculations (Medium conversion yield based on alliance safety)
+        if (state.maha >= 60) score += 4;
+        else if (state.maha >= 45) score += 2;
+        
+        // Bihar Seemanchal calculations
+        if (state.bihar >= 55) score += 5;
+        else if (state.bihar >= 40) score += 2;
+
+        // Capital scale factor
+        if (state.capital >= 70) score += 2;
+        if (state.capital <= 30) score = Math.max(1, score - 3);
+
+        // Cannot win more than contested
+        return Math.min(state.contested, score);
+    }
+
     function updateUI() {
-        // Enforce boundary parameters
+        // Enforce boundary logic
         state.funds = Math.max(0, Math.min(100, state.funds));
         state.capital = Math.max(0, Math.min(100, state.capital));
-        state.expansion = Math.max(0, Math.min(100, state.expansion));
-        state.core = Math.max(0, Math.min(100, state.core));
-        state.alliance = Math.max(0, Math.min(100, state.alliance));
-        state.scrutiny = Math.max(0, Math.min(100, state.scrutiny));
+        state.hyd = Math.max(0, Math.min(100, state.hyd));
+        state.maha = Math.max(0, Math.min(100, state.maha));
+        state.bihar = Math.max(0, Math.min(100, state.bihar));
 
-        document.getElementById('current-quarter').innerText = state.quarter;
-        document.getElementById('current-region').innerText = regions[Math.floor((state.quarter - 1) / 2) % regions.length];
+        // Text Updates
+        document.getElementById('current-week').innerText = `Week ${state.week}`;
+        document.getElementById('current-region').innerText = hubs[Math.floor((state.week - 1) / 4) % hubs.length];
         
         document.getElementById('val-funds').innerText = `₹${state.funds}L`;
         document.getElementById('bar-funds').style.width = `${state.funds}%`;
@@ -394,53 +429,47 @@
         document.getElementById('val-capital').innerText = `${state.capital}/100`;
         document.getElementById('bar-capital').style.width = `${state.capital}%`;
         
-        document.getElementById('val-expansion').innerText = `${state.expansion}%`;
-        document.getElementById('bar-expansion').style.width = `${state.expansion}%`;
+        document.getElementById('val-hyd').innerText = `${state.hyd}%`;
+        document.getElementById('bar-hyd').style.width = `${state.hyd}%`;
+        
+        document.getElementById('val-maha').innerText = `${state.maha}%`;
+        document.getElementById('bar-maha').style.width = `${state.maha}%`;
+        
+        document.getElementById('val-bihar').innerText = `${state.bihar}%`;
+        document.getElementById('bar-bihar').style.width = `${state.bihar}%`;
 
-        document.getElementById('val-core').innerText = `${state.core}%`;
-        document.getElementById('bar-core').style.width = `${state.core}%`;
-        
-        document.getElementById('val-alliance').innerText = `${state.alliance}%`;
-        document.getElementById('bar-alliance').style.width = `${state.alliance}%`;
-        
-        document.getElementById('val-scrutiny').innerText = `${state.scrutiny}%`;
-        document.getElementById('bar-scrutiny').style.width = `${state.scrutiny}%`;
+        // Dynamic Legislative Seat Counts
+        const projectedWins = calculateProjectedWins();
+        document.getElementById('seat-contested').innerText = state.contested;
+        document.getElementById('seat-projected').innerText = projectedWins;
     }
 
     function makeChoice(choiceIndex, scenarioIndex) {
-        const choice = challenges[scenarioIndex].choices[choiceIndex];
+        const choice = scenarioPool[scenarioIndex].choices[choiceIndex];
         const effect = choice.effect;
         
         state.funds += effect.funds;
         state.capital += effect.capital;
-        state.expansion += effect.expansion;
-        state.core += effect.core;
-        state.alliance += effect.alliance;
-        state.scrutiny += effect.scrutiny;
+        state.hyd += effect.hyd;
+        state.maha += effect.maha;
+        state.bihar += effect.bihar;
+        state.contested += effect.contested;
 
         logMessage(choice.log);
-        state.quarter++;
+        state.week++;
 
-        // Fail-State Assessment
+        // Fail State Validations
         if (state.funds <= 0) {
-            triggerGameOver(false, "Financial Bankruptcy! The party has run completely out of campaign cash to maintain operational workflows.");
+            triggerGameOver(false, "Campaign Cash Exhausted! You run out of logistical capacity to support out-of-station poll workers right before critical voting days.");
             return;
         }
-        if (state.alliance <= 10) {
-            triggerGameOver(false, "Coalition Collapse! Your strategic partners completely walked out, leaving your seats highly vulnerable.");
-            return;
-        }
-        if (state.scrutiny >= 95) {
-            triggerGameOver(false, "Administrative Lock! High legal risks led to strict compliance holds on your main party offices.");
-            return;
-        }
-        if (state.core <= 25) {
-            triggerGameOver(false, "Fortress Breached! By over-stretching out-of-state, you lost the critical confidence of your core regional voters.");
+        if (state.hyd <= 35) {
+            triggerGameOver(false, "Fortress Breached! Your core home city base approval collapsed below survival limits, triggering deep structural losses.");
             return;
         }
 
-        if (state.quarter > 12) {
-            evaluateComplexTerm();
+        if (state.week > 16) {
+            evaluateCampaignOutcome();
         } else {
             nextTurn();
         }
@@ -449,17 +478,16 @@
     function nextTurn() {
         updateUI();
         
-        // Safely extract a random scenario from the dataset
-        const scenarioIndex = Math.floor(Math.random() * challenges.length);
-        const scenario = challenges[scenarioIndex];
+        // Pick a scenario randomly
+        const scenarioIndex = Math.floor(Math.random() * scenarioPool.length);
+        const scenario = scenarioPool[scenarioIndex];
         
-        document.getElementById('event-badge').innerText = scenario.type;
+        document.getElementById('event-badge').innerText = `Week ${state.week}: ${scenario.type}`;
         document.getElementById('event-text').innerText = scenario.text;
         
         const choicesBox = document.getElementById('choices-box');
         choicesBox.innerHTML = ''; 
 
-        // Safely generate explicit UI buttons linking explicitly to choice mappings
         scenario.choices.forEach((choice, index) => {
             const btn = document.createElement('button');
             btn.className = 'choice-btn';
@@ -469,40 +497,44 @@
         });
     }
 
-    function evaluateComplexTerm() {
+    function evaluateCampaignOutcome() {
         updateUI();
-        let endNarrative = "";
-        let win = false;
+        const wins = calculateProjectedWins();
+        let finalNarrative = "";
+        let winStatus = false;
 
-        if (state.expansion >= 55 && state.alliance >= 45 && state.core >= 50) {
-            win = true;
-            endNarrative = `<span class="status-win">Grand National Powerhouse! 👑</span><br><br>Superb. You expanded into multiple new states while maintaining your base and stabilizing alliances. You hold the definitive national balance of power.`;
-        } else if (state.core >= 60) {
-            win = true;
-            endNarrative = `<span class="status-win">Fortress Conserved! 🏛️</span><br><br>National expansion hit roadblocks due to structural opposition campaigns, but you completely defended your historic base. You remain an elite regional force.`;
+        if (wins >= 10 && state.hyd >= 70) {
+            winStatus = true;
+            finalNarrative = `<strong style="color: var(--secondary-color); font-size:1.3rem;">Electoral Breakthrough! 👑</strong><br><br>With **${wins} seats secured**, you successfully held your Hyderabad old-city fortress while gaining key multi-seat footholds in Maharashtra and Bihar. You hold a true legislative balance of power, ensuring your voice cannot be bypassed in floor negotiations.`;
+        } else if (wins >= 5) {
+            winStatus = true;
+            finalNarrative = `<strong style="color: var(--info-color); font-size:1.3rem;">Stronghold Preserved! 🏛️</strong><br><br>You secured **${wins} seats**. While national cross-currents limited out-of-state expansion wins, your historic fortress stands entirely undisputed. The party holds its core ground intact.`;
         } else {
-            win = false;
-            endNarrative = `<span class="status-loss">Strategic Defeat! ❌</span><br><br>The campaign overextended resources. Trying to manage multi-state expansion with failing capital left the party spread thin on Election Day.`;
+            winStatus = false;
+            finalNarrative = `<strong style="color: var(--danger-color); font-size:1.3rem;">Electoral Retraction! ❌</strong><br><br>The campaign concluded with only **${wins} seats**. Aggressive multi-front expenditures overextended your treasury, while localized anti-incumbency models chipped away at your primary hubs.`;
         }
 
-        triggerGameOver(win, endNarrative);
+        document.getElementById('event-badge').innerText = "Election Night Results";
+        document.getElementById('event-text').innerHTML = finalNarrative;
+        document.getElementById('choices-box').innerHTML = '';
+        document.getElementById('restart-btn').classList.remove('hidden');
     }
 
     function triggerGameOver(isWin, text) {
-        document.getElementById('event-badge').innerText = "Simulation Finalized";
-        document.getElementById('event-text').innerHTML = text;
+        document.getElementById('event-badge').innerText = "Campaign Terminated";
+        document.getElementById('event-text').innerHTML = `<span style="color: var(--danger-color); font-weight:bold;">Critical Failure:</span> ${text}`;
         document.getElementById('choices-box').innerHTML = '';
         document.getElementById('restart-btn').classList.remove('hidden');
     }
 
     function resetGame() {
-        state = { quarter: 1, funds: 50, capital: 50, expansion: 20, core: 65, alliance: 40, scrutiny: 30 };
+        state = { week: 1, funds: 60, capital: 50, hyd: 75, maha: 45, bihar: 40, contested: 15 };
         document.getElementById('restart-btn').classList.add('hidden');
-        document.getElementById('log-box').innerHTML = "[SYSTEM]: Resetting state indexes. Ready.";
+        document.getElementById('log-box').innerHTML = "[SYSTEM]: New election window drawn. Resetting parameters.";
         nextTurn();
     }
 
-    // Direct Boot Loop Execution
+    // Main Init
     window.onload = function() {
         nextTurn();
     };
@@ -510,3 +542,4 @@
 
 </body>
 </html>
+                  
